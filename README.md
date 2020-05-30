@@ -23,11 +23,7 @@ Where `classes_csv` is a path to a CSV in the requisite format
 (see `examples/classes.csv`), and `token` is the Bearer token
 given to you by Blackboard Collaborate.
 
-Note that this script has a shebang line to use cs1511's python3
-distribution on CSE systems. We recommend you use the script on 
-CSE systems, since that python3 is guaranteed to have the 
-correct packages installed.
-
+This script requires `pandas` and `requests`.
 
 ### Classes CSV
 
