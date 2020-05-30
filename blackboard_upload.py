@@ -119,9 +119,9 @@ def main():
     classes = parse_classes(args.classes_csv)
     session = get_authed_session(args.token)
     for bb_class in classes:
+        print(f"Creating Class: {bb_class['name']}")
         create_bb_class(bb_class, session)
-        if args.debug:
-            return
+        time.sleep(1)
 
 if __name__ == "__main__":
     main()
