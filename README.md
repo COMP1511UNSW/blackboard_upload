@@ -5,7 +5,7 @@ This is a small utilty to upload a list of classes to Blackboard Collaborate.
 ## Usage Reference
 
 ```
-usage: blackboard_generate.py [-h] [-d] classes_csv token
+usage: blackboard_upload.py [-h] [-d] classes_csv token
 
 Upload classes to Blackboard Collaborate
 
@@ -35,7 +35,7 @@ The classes CSV contains the list of classes you want to upload, with the follow
 
  - `name` (string) - the name of the class
  - `start` (datestamp) - the start date/time of the *first* class, in `LOCAL_TIMEZONE`
- (as defined by the global variable in `blackboard_generate.py`, currently "Australia/Sydney" )
+ (as defined by the global variable in `blackboard_upload.py`, currently "Australia/Sydney" )
  - `end` (datestamp) - the end date/time of the *first* class, in `LOCAL_TIMEZONE`
  (this should be on the same day as `start`).
  - `recurr` (int) - the number of times the class will occur
@@ -47,7 +47,7 @@ The classes CSV contains the list of classes you want to upload, with the follow
 3. Open your developer tools (usually, right click on the page, choose "Inspect Element")
 4. Go to the "Console" tab of your developer tools
 5. Find the message "LaunchParams loaded parameters:", and copy the value of "tokens" (this will be a long base64 string, with some dots in the middle. Copy everything inside the quotes.)
-6. Run the script provided in this repo, with the command `./blackboard_generate.py <your_session_csv>.csv <the_token_you_copied>`
+6. Run the script provided in this repo, with the command `./blackboard_upload.py <your_session_csv>.csv <the_token_you_copied>`
 
 ## TODO
 
