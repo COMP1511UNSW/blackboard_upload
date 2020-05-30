@@ -7,8 +7,6 @@ from pandas.api.types import is_numeric_dtype
 import requests
 import pathlib
 
-DEFAULT_WEEKS = 10
-
 LOCAL_TIMEZONE = "Australia/Sydney"
 
 HEADER_ROWS = ['name', 'start', 'end', 'recurr']
@@ -100,7 +98,7 @@ def bb_json_from_dict(bb_class):
             "recurrenceType":"weekly",
             "interval":1,
             "recurrenceEndType":"after_occurrences_count",
-            "numberOfOccurrences":10,
+            "numberOfOccurrences":bb_class['recurr'],
             "daysOfTheWeek":[day_of_week],
             "endDate":None
         },
