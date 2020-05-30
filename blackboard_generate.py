@@ -1,4 +1,4 @@
-#!/web/cs1511/python3
+#!/web/cs1511/bin/python3
 import argparse
 from datetime import datetime
 import time
