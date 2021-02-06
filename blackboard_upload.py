@@ -9,8 +9,10 @@ from collections.abc import Mapping
 
 import requests
 from dateutil.parser import parse
+from dateutil.tz import gettz, UTC
 
 LOCAL_TIMEZONE = "Australia/Sydney"
+tz = gettz("Australia/Sydney")
 
 REQUIRED_HEADER_ROWS = ['name', 'start', 'end']
 
@@ -80,8 +82,8 @@ def parse_dict(config: dict) -> dict:
     :return:
     """
 
-    if "startTime" in config: config["startTime"] = parse(config["startTime"]).isoformat()
-    if "endTime" in config: config["endTime"] = parse(config["endTime"]).isoformat()
+    if "startTime" in config: config["startTime"] = parse(config["startTime"]).astimezone(UTC).isoformat()
+    if "endTime" in config: config["endTime"] = parse(config["endTime"]).astimezone(UTC).isoformat()
 
     config["occurrenceType"] = "P" if "recurrenceEndType" in config else "S"
     if "recurrenceRule" not in config: config["recurrenceRule"] = {}
@@ -108,6 +110,8 @@ def parse_dict(config: dict) -> dict:
         config["recurrenceRule"]["endDate"] = parse(config["endDate"]).isoformat()
         del config["endDate"]
 
+    if "boundaryTime" in config: config["boundaryTime"] = int(config["boundaryTime"])
+
     return config
 
 
@@ -128,7 +132,7 @@ def bb_json_from_dict(bb_course_config: dict, bb_class_config: dict) -> dict:
             else: d[k] = v
         return d
 
-    datestamp = datetime.now().isoformat()
+    datestamp = datetime.now().astimezone(UTC).isoformat()
 
     # If `largeSessionEnable` is `True` then `noEndDate` MUST be false and `occurrenceType` MUST be `S`
     # If `noEndDate` is `True` then `occurrenceType` MUST be `S`
