@@ -156,7 +156,7 @@ def bb_json_from_dict(bb_course_config: dict, bb_class_config: dict) -> dict:
         # Guest access [True, False]
         "allowGuest": True,
         # Guest role ["participant", "presenter", "moderator"]
-        "guestRole": "moderator",
+        "guestRole": "participant",
         # timestamp of the start of the *first* session {datetimestamp} (must be provided)
         "startTime": None,
         # timestamp of the end of the *first* session {datetimestamp} (must be provided)
