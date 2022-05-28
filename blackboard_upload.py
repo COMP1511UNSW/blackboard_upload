@@ -12,9 +12,6 @@ from dateutil.parser import parse
 from dateutil.tz import gettz, UTC
 
 LOCAL_TIMEZONE = "Australia/Sydney"
-tz = gettz("Australia/Sydney")
-
-REQUIRED_HEADER_ROWS = ['name', 'start', 'end']
 
 BB_POST_URL = "https://au-lti.bbcollab.com/collab/api/csa/sessions"
 BB_DELETE_URL = "https://au-lti.bbcollab.com/collab/api/csa/sessions/{sid}/occurrences/{oid}"
@@ -30,7 +27,7 @@ def parse_args() -> Namespace:
     parser = ArgumentParser(description="Upload classes to Blackboard Collaborate")
 
     parser.add_argument("classes_csv", help="csv file containing classes", type=FileType('r'))
-    parser.add_argument("config_json", help="json file containing session config", type=FileType('r'), default=None)
+    parser.add_argument("config_json", help="json file containing global session config", type=FileType('r'), default=None, nargs='?')
     parser.add_argument("-t", "--token", help="Your auth token for BB Collaborate.", type=FileType('r'), default=None)
     parser.add_argument("-d", "--debug", help="Turn on requests debug logging", action='store_true')
 
@@ -82,35 +79,47 @@ def parse_dict(config: dict) -> dict:
     :return:
     """
 
-    if "startTime" in config: config["startTime"] = parse(config["startTime"]).astimezone(UTC).isoformat()
-    if "endTime" in config: config["endTime"] = parse(config["endTime"]).astimezone(UTC).isoformat()
-
     config["occurrenceType"] = "P" if "recurrenceEndType" in config else "S"
-    if "recurrenceRule" not in config: config["recurrenceRule"] = {}
+
+    if "recurrenceRule" not in config:
+        config["recurrenceRule"] = {}
+
     if "recurrenceType" in config:
         config["recurrenceRule"]["recurrenceType"] = config["recurrenceType"]
         if config["recurrenceEndType"] not in ["daily", "weekly", "monthly"]: raise ValueError()
         del config["recurrenceType"]
+
     if "interval" in config:
         config["recurrenceRule"]["interval"] = int(config["interval"])
         del config["interval"]
+
     if "recurrenceEndType" in config:
         if config["recurrenceEndType"] not in ["after_occurrences_count", "on_date"]: raise ValueError()
         config["recurrenceRule"]["recurrenceEndType"] = config["recurrenceEndType"]
         del config["recurrenceEndType"]
+
     if "daysOfTheWeek" in config:
         config["recurrenceRule"]["daysOfTheWeek"] = list(map(str.strip, config["daysOfTheWeek"].strip().split(",")))
         del config["daysOfTheWeek"]
     elif "startTime" in config:
         config["recurrenceRule"]["daysOfTheWeek"] = [parse(config['startTime']).strftime("%A").lower()[:2]]
+
     if "numberOfOccurrences" in config:
         config["recurrenceRule"]["numberOfOccurrences"] = int(config["numberOfOccurrences"])
         del config["numberOfOccurrences"]
+
     if "endDate" in config:
         config["recurrenceRule"]["endDate"] = parse(config["endDate"]).isoformat()
         del config["endDate"]
 
-    if "boundaryTime" in config: config["boundaryTime"] = int(config["boundaryTime"])
+    if "boundaryTime" in config:
+        config["boundaryTime"] = int(config["boundaryTime"])
+
+    if "startTime" in config:
+        config["startTime"] = parse(config["startTime"]).replace(tzinfo=gettz(LOCAL_TIMEZONE)).astimezone(UTC).isoformat()
+
+    if "endTime" in config:
+        config["endTime"] = parse(config["endTime"]).replace(tzinfo=gettz(LOCAL_TIMEZONE)).astimezone(UTC).isoformat()
 
     return config
 
@@ -147,7 +156,7 @@ def bb_json_from_dict(bb_course_config: dict, bb_class_config: dict) -> dict:
         # Guest access [True, False]
         "allowGuest": True,
         # Guest role ["participant", "presenter", "moderator"]
-        "guestRole": "participant",
+        "guestRole": "moderator",
         # timestamp of the start of the *first* session {datetimestamp} (must be provided)
         "startTime": None,
         # timestamp of the end of the *first* session {datetimestamp} (must be provided)
@@ -224,9 +233,6 @@ def bb_json_from_dict(bb_course_config: dict, bb_class_config: dict) -> dict:
 
     bb_session_config = update(update(dict(bb_default_config), parse_dict(bb_course_config)), parse_dict(bb_class_config))
 
-    if "exclude" in bb_session_config:
-        del bb_session_config["exclude"]
-
     if None in bb_session_config.values():
         raise ValueError(
             f"\
@@ -266,7 +272,7 @@ def main() -> int:
     args = parse_args()
     if args.debug: enable_logging()
     session = get_authed_session(args.token.read().strip() if args.token else input("BB Collaborate auth token: "))
-    config = json_load(args.config_json)
+    config = json_load(args.config_json) if args.config_json else {}
     for bb_class in csv_dictreader(args.classes_csv, dialect="unix"):
         create_bb_class(session, config, bb_class)
         sleep(1)

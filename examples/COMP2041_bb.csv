@@ -1,17 +1,17 @@
-name,startTime,endTime,recurrenceEndType,numberOfOccurrences,exclude
-"T12B (Tue) Week: 1-5,7-10","2021-02-16 12:00:00","2021-02-16 15:00:00",after_occurrences_count,10,6
-"T12C (Tue) Week: 1-5,7-10","2021-02-16 12:00:00","2021-02-16 15:00:00",after_occurrences_count,10,6
-"T14B (Tue) Week: 1-5,7-10","2021-02-16 14:00:00","2021-02-16 17:00:00",after_occurrences_count,10,6
-"T14C (Tue) Week: 1-5,7-10","2021-02-16 14:00:00","2021-02-16 17:00:00",after_occurrences_count,10,6
-"T17B (Tue) Week: 1-5,7-10","2021-02-16 17:00:00","2021-02-16 20:00:00",after_occurrences_count,10,6
-"T17C (Tue) Week: 1-5,7-10","2021-02-16 17:00:00","2021-02-16 20:00:00",after_occurrences_count,10,6
-"W09B (Wed) Week: 1-5,7-10","2021-02-17 09:00:00","2021-02-17 12:00:00",after_occurrences_count,10,6
-"W09C (Wed) Week: 1-5,7-10","2021-02-17 09:00:00","2021-02-17 12:00:00",after_occurrences_count,10,6
-"W11B (Wed) Week: 1-5,7-10","2021-02-17 11:00:00","2021-02-17 14:00:00",after_occurrences_count,10,6
-"W11C (Wed) Week: 1-5,7-10","2021-02-17 11:00:00","2021-02-17 14:00:00",after_occurrences_count,10,6
-"W13B (Wed) Week: 1-5,7-10","2021-02-17 13:00:00","2021-02-17 16:00:00",after_occurrences_count,10,6
-"W13C (Wed) Week: 1-5,7-10","2021-02-17 13:00:00","2021-02-17 16:00:00",after_occurrences_count,10,6
-"W15B (Wed) Week: 1-5,7-10","2021-02-17 15:00:00","2021-02-17 18:00:00",after_occurrences_count,10,6
-"W15C (Wed) Week: 1-5,7-10","2021-02-17 15:00:00","2021-02-17 18:00:00",after_occurrences_count,10,6
-"H10B (Thu) Week: 1-5,7-10","2021-02-18 10:00:00","2021-02-18 13:00:00",after_occurrences_count,10,6
-"H10C (Thu) Week: 1-5,7-10","2021-02-18 10:00:00","2021-02-18 13:00:00",after_occurrences_count,10,6
+name,startTime,endTime,recurrenceEndType,numberOfOccurrences
+"T12B (Tue) Week: 1-5,7-10","2021-02-16 12:00:00","2021-02-16 15:00:00",after_occurrences_count,10
+"T12C (Tue) Week: 1-5,7-10","2021-02-16 12:00:00","2021-02-16 15:00:00",after_occurrences_count,10
+"T14B (Tue) Week: 1-5,7-10","2021-02-16 14:00:00","2021-02-16 17:00:00",after_occurrences_count,10
+"T14C (Tue) Week: 1-5,7-10","2021-02-16 14:00:00","2021-02-16 17:00:00",after_occurrences_count,10
+"T17B (Tue) Week: 1-5,7-10","2021-02-16 17:00:00","2021-02-16 20:00:00",after_occurrences_count,10
+"T17C (Tue) Week: 1-5,7-10","2021-02-16 17:00:00","2021-02-16 20:00:00",after_occurrences_count,10
+"W09B (Wed) Week: 1-5,7-10","2021-02-17 09:00:00","2021-02-17 12:00:00",after_occurrences_count,10
+"W09C (Wed) Week: 1-5,7-10","2021-02-17 09:00:00","2021-02-17 12:00:00",after_occurrences_count,10
+"W11B (Wed) Week: 1-5,7-10","2021-02-17 11:00:00","2021-02-17 14:00:00",after_occurrences_count,10
+"W11C (Wed) Week: 1-5,7-10","2021-02-17 11:00:00","2021-02-17 14:00:00",after_occurrences_count,10
+"W13B (Wed) Week: 1-5,7-10","2021-02-17 13:00:00","2021-02-17 16:00:00",after_occurrences_count,10
+"W13C (Wed) Week: 1-5,7-10","2021-02-17 13:00:00","2021-02-17 16:00:00",after_occurrences_count,10
+"W15B (Wed) Week: 1-5,7-10","2021-02-17 15:00:00","2021-02-17 18:00:00",after_occurrences_count,10
+"W15C (Wed) Week: 1-5,7-10","2021-02-17 15:00:00","2021-02-17 18:00:00",after_occurrences_count,10
+"H10B (Thu) Week: 1-5,7-10","2021-02-18 10:00:00","2021-02-18 13:00:00",after_occurrences_count,10
+"H10C (Thu) Week: 1-5,7-10","2021-02-18 10:00:00","2021-02-18 13:00:00",after_occurrences_count,10

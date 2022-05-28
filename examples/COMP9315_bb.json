@@ -4,6 +4,5 @@
   "participantCanUseTools": false,
   "canShareAudio": false,
   "canShareVideo": false,
-  "canPostMessage": false,
-  "boundaryTime": 30
+  "canPostMessage": false
 }
