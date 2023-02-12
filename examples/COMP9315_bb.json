@@ -1,0 +1,8 @@
+{
+  "mustBeSupervised": true,
+  "largeSessionEnable": true,
+  "participantCanUseTools": false,
+  "canShareAudio": false,
+  "canShareVideo": false,
+  "canPostMessage": false
+}
